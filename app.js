@@ -10,6 +10,23 @@ app.get("/", function (request, response) {
 });
 
 app.get("/todos", async function (_request, response) {
+  app.get('/', async (request, response)=>{
+    const allTodos = await Todo.getTodos();
+    if (request.accepts('html')) {
+      response.render('index', {
+        allTodos,
+    });
+       } else {
+    response.json({allTodos});
+  }
+});
+  app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/todos', (request, response)=>{
+  console.log('Todo List', request.body);
+});
+  
+  
   console.log("Processing list of all Todos ...");
   try {
     const try_todo = await Todo.findAll();
@@ -36,9 +53,13 @@ app.get("/todos/:id", async function (request, response) {
   }
 });
 
-app.post("/todos", async function (request, response) {
+app.post('/todos', async (request, response)=>{
+  console.log('Todo List');
   try {
-    const todo = await Todo.addTodo(request.body);
+    console.log('entering in try block');
+    const todo =await Todo.addTodo({
+      title: request.body.title, dueDate: request.body.dueDate,
+    });
     return response.json(todo);
   } catch (error) {
     console.log(error);
@@ -58,7 +79,7 @@ app.put("/todos/:id/markAsCompleted", async function (request, response) {
 });
 
 app.delete("/todos/:id", async function (request, response) {
-  console.log("We have to delete a Todo with ID: ", request.params.id);
+  console.log("I had been deleted a Todo of  ID: ", request.params.id);
   const delete_Flag = await Todo.destroy({ where: { id: request.params.id } });
   response.send(delete_Flag ? true : false);
   // FILL IN YOUR CODE HERE
