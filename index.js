@@ -1,5 +1,5 @@
 const app = require('./app');
-const PORT = 3001;
+const PORT = 3000;
  
 app.listen(process.env.PORT || PORT, function(err){
     if (err) console.log("Error in server setup")
