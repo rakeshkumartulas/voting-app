@@ -5,42 +5,49 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
-       static associate() {
+       static associate(models) {
+        Todo.belongsTo(models.User,{
+          foreignKey: 'userId'
+        })
+
           }
 
-    static addTodo({title, dueDate}) {
-      return this.create({title: title, dueDate: dueDate, completed: false});
+    static addTodo({title, dueDate, userId}) {
+      return this.create({title: title, dueDate: dueDate, completed: false,userId});
     }
 
     static getTodos(){
       return this.findAll();
     }
 
-    static async overdue() {
+    static async overdue(userId) {
       return await Todo.findAll({
         where: {
           dueDate: { [Op.lt]: new Date().toLocaleDateString("en-CA") },
           completed: false,
+          userId,
         },
       });
     }
 
-    static async dueToday() {
+    static async dueToday(userId) {
       
       return await Todo.findAll({
         where: {
           dueDate: { [Op.eq]: new Date().toLocaleDateString("en-CA") },
           completed: false,
+          userId,
         },
       });
     }
 
-    static async dueLater() {
+    static async dueLater(userId) {
       
       return await Todo.findAll({
         where: {
           dueDate: { [Op.gt]: new Date().toLocaleDateString("en-CA") },
           completed: false,
+          userId,
         },
       });
     }
@@ -53,10 +60,11 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
 
-    static async completedItems(){
+    static async completedItems(userId){
       return this.findAll({
         where: {
           completed: true,
+          userId,
         }
       })
     }
