@@ -124,7 +124,7 @@ app.get('/todos',connectEnsureLogin.ensureLoggedIn(), async (request, response)=
   const completed_Items = await Todo.completedItems(loggedInUser);
   if (request.accepts('html')) {
     response.render('todos', {
-      all_Todos, over_due, due_Today, due_Later, completed_Items,
+      all_Todos, over_due, due_Today, due_Later, completed_Items,user: request.user,
       csrfToken: request.csrfToken(),
     });
   } else {
