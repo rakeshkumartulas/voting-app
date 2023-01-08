@@ -268,7 +268,14 @@ app.delete('/todos/:id', connectEnsureLogin.ensureLoggedIn(), async function(req
   // Then, we have to respond back with true/false based on whether the Todo was deleted or not.
   // response.send(true)
   const deleteFlag = await Todo.destroy({where: {id: request.params.id, userId:request.user.id,}});
-  response.send(deleteFlag ? true : false);
+  if(deleteFlag ===0)
+  {
+    return response.send(false);
+  }
+  else{
+    response.send(true);
+  }
 });
+
 
 module.exports = app;
