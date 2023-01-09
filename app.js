@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
- /* const {request, response} = require('express');
+  const {request, response} = require('express');
 const express = require('express');
 const app = express();
 const csrf = require('tiny-csrf');
@@ -39,10 +39,7 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000 // that will be equal to 24 Hours / A whole day
   }
 }))
-// user model imported here
-const {
-  Users,Elections,Questions, Options, Voters, Votes
-} = require("./models");
+
 
 
 app.use(passport.initialize());
@@ -73,7 +70,7 @@ passport.use(new LocalStrategy({
   .catch((error) => {
     console.error(error);
     return done(null,false,{
-      message: "You are not a registered user",
+      message: "You are unauthrized  user",
     })
 
   })
@@ -101,11 +98,11 @@ app.set('view engine', 'ejs');
 app.get('/', async (request, response)=>{
   if(request.user)
   {
-    response.redirect('/dashboard');
+    response.redirect('/todos');
   }
   else{  
   response.render('index', {
-      title: 'voting Application',
+      title: 'Todos Application',
       csrfToken: request.csrfToken(),
     });
   }
@@ -197,7 +194,7 @@ app.post('/users',async (request,response)=>{
         console.log(err);
         response.redirect("/")
       }
-      response.redirect('/dashboard');
+      response.redirect('/todos');
     })
     
   }
@@ -210,7 +207,7 @@ app.post('/users',async (request,response)=>{
   //console.log("First Name:",request.body.firstName)
 });
 
-app.get('/dashboard',connectEnsureLogin.ensureLoggedIn(),async (request,response)=>{
+/*app.get('/dashboard',connectEnsureLogin.ensureLoggedIn(),async (request,response)=>{
   const currentUserId = request.user.id;
   const elections = await Elections.findAllElectionOfUser(currentUserId);  
   response.render('dashboard',{
@@ -218,7 +215,7 @@ app.get('/dashboard',connectEnsureLogin.ensureLoggedIn(),async (request,response
     elections,
     csrfToken: request.csrfToken(),
   });
-});
+});*/
 
 
 app.get('/login',(request,response)=>{
@@ -233,7 +230,7 @@ app.post('/session',passport.authenticate('local',{
   failureFlash: true,
 }),(request,response)=>{
   console.log(request.user);
-  response.redirect('/dashboard');
+  response.redirect('/todos');
 })
 
 
@@ -247,7 +244,7 @@ app.get('/signout',(request,response, next) => {
     response.redirect('/');
   })
 })
-app.post(
+/*app.post(
   "/addElection",
   connectEnsureLogin.ensureLoggedIn(),
   async (request, response) => {
@@ -274,7 +271,7 @@ app.post(
 
 );
 // Election Ballot form Management  
-app.get('/elections/:id/ballotForm',
+/*app.get('/elections/:id/ballotForm',
 connectEnsureLogin.ensureLoggedIn(),
     async (request, response) => {
     try{
@@ -294,11 +291,11 @@ connectEnsureLogin.ensureLoggedIn(),
       console.log(error);
       return response.status(422).json(error);
     }
-});
+});*/
 
 
 // Question add request
-app.post(
+/*app.post(
   "/question/:eid",
   connectEnsureLogin.ensureLoggedIn(),
   async (request, response) => {
@@ -320,7 +317,7 @@ app.post(
       return response.redirect(`/elections/${request.params.eid}/ballotform`);
     }
   }
-);
+);*/
 
 
 
@@ -379,11 +376,11 @@ app.delete('/todos/:id', connectEnsureLogin.ensureLoggedIn(), async function(req
 });
 
 
-module.exports = app;*/
+module.exports = app;
 
  /* new code start here =================================================> */ 
  /* eslint-disable no-unused-vars */
-const {request, response} = require('express');
+/*const {request, response} = require('express');
 const express = require('express');
 const app = express();
 const csrf = require('tiny-csrf');
@@ -637,3 +634,4 @@ app.post(
 
 
 module.exports = app;
+*/
