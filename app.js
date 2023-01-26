@@ -215,7 +215,57 @@ app.get('/signout',(request,response, next) => {
   })
 })
 
+/*app.post('/Add_Election', function(req, res,next) {
+  const ele_name = req.body.ele_Name;
+  //const logged_User = request.user.id;
+  
+ 
+  const sql = `INSERT INTO elections (name,userid) VALUES ("${ele_name}")`;
+  db.query(sql, function(err) {
+    if(err)
+    {
+      return next(err);
+    }
+    response.redirect('/');
 
+    console.log('record inserted');
+    req.flash('success', 'Data added successfully!');
+    res.redirect('/mainpage');
+    
+  });
+});
+*/
+
+
+
+
+
+app.post(
+  "/Add_Election",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (request, response) => {
+    if(!request.body.ele_Name)
+    {
+      request.flash(
+        "error", 
+      "Enter Election name "
+      );
+      return response.redirect("/Mainpage");
+    }  
+    try {
+        const logged_User = request.user.id;
+        await Elections.createNewElection(request.body.ele_Name, logged_User);
+        request.flash("success", "Election Name has been added successfull ");
+        return response.redirect("/mainpage");
+      } catch (error) {
+        console.log(error);
+        if ("errors" in error)
+          request.flash("error"," something missing");
+        return response.redirect("/mainpage");
+      }
+    }
+
+);
 
 
 
