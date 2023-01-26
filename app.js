@@ -215,7 +215,8 @@ app.get('/signout',(request,response, next) => {
   })
 })
 
-/*app.post('/Add_Election', function(req, res,next) {
+/* try to another way
+app.post('/Add_Election', function(req, res,next) {
   const ele_name = req.body.ele_Name;
   //const logged_User = request.user.id;
   
