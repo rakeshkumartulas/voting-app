@@ -255,7 +255,7 @@ app.post(
     }  
     try {
         const logged_User = request.user.id;
-        await Elections.createNewElection(request.body.ele_Name, logged_User);
+        await Elections.Add_Election(request.body.ele_Name, logged_User);
         request.flash("success", "Election Name has been added successfull ");
         return response.redirect("/mainpage");
       } catch (error) {
