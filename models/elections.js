@@ -15,11 +15,29 @@ module.exports = (sequelize, DataTypes) => {
       Elections.belongsTo(models.User, {
         foreignKey: "userId",
       });
+      
 
 
       // define association here
     }
+    static findAllElectionOfUser(userId)
+    {
+      return this.findAll({where:{userId}});
+    }
+
+
+
+    // Add_Election define this method here
+
+    static Add_Election(ele_Name,logged_user) {
+      return this.create({name:ele_Name,userId:logged_user,start: false,end: false, });
+    }
   }
+   // static async Add_Election({ele_Name, logged_User}){
+
+      //return this.create({name:ele_Name, userId:logged_User})
+   // }
+ // }
   Elections.init({
     name: DataTypes.STRING,
     start: DataTypes.STRING,

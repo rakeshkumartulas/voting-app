@@ -187,10 +187,10 @@ app.post('/user',async (request,response)=>{
 
 app.get('/mainpage',connectEnsureLogin.ensureLoggedIn(),async (request,response)=>{
   const Present_UserId = request.user.id;
-  //const elections = await Elections.findAllElectionOfUser(Present_UserId);  
+  const elections = await Elections.findAllElectionOfUser(Present_UserId);  
   response.render('Mainpage',{
     title: 'Mainpage',
-    // elections,
+    elections,
     csrfToken: request.csrfToken(),
   });
 });
@@ -255,6 +255,8 @@ app.post(
     }  
     try {
         const logged_User = request.user.id;
+        console.log(" check login name :", logged_User);
+        console.log(" check election name :",request.body.ele_Name);
         await Elections.Add_Election(request.body.ele_Name, logged_User);
         request.flash("success", "Election Name has been added successfull ");
         return response.redirect("/mainpage");
