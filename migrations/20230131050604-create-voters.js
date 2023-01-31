@@ -16,7 +16,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: "voter",
       },
       createdAt: {
         allowNull: false,
