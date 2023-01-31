@@ -4,11 +4,10 @@ const express = require('express');
 const app = express();
 const csrf = require('tiny-csrf');
 
-const {Elections, User} = require('./models');
+const {Elections, User,Questionslist,voters} = require('./models');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
 const passport = require('passport');
 const connectEnsureLogin = require('connect-ensure-login');
 const session = require('express-session');
@@ -187,7 +186,8 @@ app.post('/user',async (request,response)=>{
 
 app.get('/mainpage',connectEnsureLogin.ensureLoggedIn(),async (request,response)=>{
   const Present_UserId = request.user.id;
-  const elections = await Elections.findAllElectionOfUser(Present_UserId);  
+  const elections = await Elections.findAllElectionOfUser(Present_UserId);
+  //const elections = await Elections.search_elections_user(Present_UserId);  
   response.render('Mainpage',{
     title: 'Mainpage',
     elections,
@@ -325,6 +325,31 @@ app.delete('/todos/:id', connectEnsureLogin.ensureLoggedIn(), async function(req
   }
 });
 */
+app.get('/elections/:id/ballot',
+connectEnsureLogin.ensureLoggedIn(),
+    async (request, response) => {
+    try{
+          const election = await Elections.findByPk(request.params.id, {
+        include: [
+          { model: Questionslist},
+          { model: voters},
+        ],
+      });
+      return response.render("ballot", {
+        csrfToken: request.csrfToken(),
+        user: request.user,
+        title: 'Ballot:Questions for voters',
+        election,
+      });
+    } catch (error) {
+      console.log(error);
+      return response.status(422).json(error);
+    }
+});
+
+
+
+
 
 module.exports = app;
 

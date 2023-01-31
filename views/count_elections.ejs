@@ -14,27 +14,27 @@
             <tr>
                 
                
-                <th class="border-2 border-rose-600">S.No.</th>
-                <th class="border-2 border-rose-600">Election Name</th>
-                <th class="border-2 border-rose-600">Manage Ballot(Question/Voters)</th>
-                <th class="border-2 border-rose-600">Edit</th>
-                <th class="border-2 border-rose-600">Delete</th>
-                <th class="border-2 border-rose-600">Launch Election</th>
+                <td class="border-2 border-rose-600 font-bold">S.No.</td>
+                <td class="border-2 border-rose-600 font-bold">Election Name</td>
+                <td class="border-2 border-rose-600 font-bold">Ballot(Question for voter)</td>
+                <td class="border-2 border-rose-600 font-bold">Edit</td>
+                <td class="border-2 border-rose-600 font-bold">Delete</td>
+                <td class="border-2 border-rose-600 font-bold">Launch Election</td>
 
             </tr>
         
     
             <% for(let i = 0; i < elections.length; i++) { %>
             <tr>
-                <td class="border border-slate-500"><i class="bi bi-pencil-square"></i></td>
-                <td class="border border-slate-500"><i class="bi bi-x-octagon-fill"></i></td>
                 <td class="border border-slate-500"><%= i+1%> </td>
                 <td class="border border-slate-500"><%= elections[i].name %></td>
                 <td class="border border-slate-500 content-center">
-                    <a href="/elections/<%= elections[i].id %>/ballotForm">
-                        <i class="bi bi-kanban"></i>
-                    </a> 
-                </td>
+                    <a href="/elections/<%= elections[i].id %>/ballot">click here</a></td>
+                <td class="border border-slate-500"><i class="bi bi-pencil-square"></i></td>
+                <td class="border border-slate-500"><i class="bi bi-x-octagon-fill"></i></td>
+                
+                
+                
                 <td class="border border-slate-500"><i class="bi bi-rocket-takeoff"></i></td>
                 
                 

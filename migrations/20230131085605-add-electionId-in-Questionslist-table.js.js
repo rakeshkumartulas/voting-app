@@ -3,19 +3,10 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-
-    await queryInterface.addColumn("Elections", "userId", {
+    await queryInterface.addColumn("Questionslist", "electionId", {
       type: Sequelize.DataTypes.INTEGER,
     });
-    await queryInterface.addConstraint("Elections", {
-      fields: ["userId"],
-      type: "foreign key",
-      references: {
-        table: "User",
-        field: "id",
-      },
-    });
-    /**
+        /**
      * Add altering commands here.
      *
      * Example:
