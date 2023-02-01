@@ -4,10 +4,10 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-    await queryInterface.addColumn("Questionslists", "electionId", {
+    await queryInterface.addColumn("Questionslist", "electionId", {
       type: Sequelize.DataTypes.INTEGER,
     });
-    await queryInterface.addConstraint("Questionslists", {
+    await queryInterface.addConstraint("Questionslist", {
       fields: ["electionId"],
       type: "foreign key",
       references: {
