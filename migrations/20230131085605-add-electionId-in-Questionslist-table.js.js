@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.addColumn("Questionslist", "electionId", {
+    await queryInterface.addColumn("Questionslists", "electionId", {
       type: Sequelize.DataTypes.INTEGER,
     });
     await queryInterface.addConstraint("Questionslists", {
