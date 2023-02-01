@@ -100,7 +100,7 @@ app.get('/', async (request, response)=>{
   }
   else{  
   response.render('index', {
-      title: 'Voting web Application Application',
+      title: 'Voting web Application',
       csrfToken: request.csrfToken(),
     });
   }
@@ -346,7 +346,31 @@ connectEnsureLogin.ensureLoggedIn(),
       return response.status(422).json(error);
     }
 });
-
+app.post(
+  "/questionslist/:ele_Id",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (request, response) => {
+    if(!request.body.title)
+    {
+      request.flash("error", "Enter the questionnaire");
+      return response.redirect(`/elections/${request.params.ele_Id}/ballot`);
+    }  
+    try{
+      await Questionslist.addquestionnaire(
+        
+        request.body.title,
+        request.body.description,
+        request.params.ele_Id,
+        Console.log("questions name",request.body.title,)
+      );
+      return response.redirect(`/elections/${request.params.ele_Id}/ballot`);
+    }
+    catch(error){
+      console.log(error);
+      return response.redirect(`/elections/${request.params.ele_Id}/ballot`);
+    }
+  }
+);
 
 
 

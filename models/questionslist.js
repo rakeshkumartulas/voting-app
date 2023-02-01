@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
       // define association here
     }
-    static createnewQuestion(title, details, electionId) {
+    static Addquestionnaire(title, details, electionId) {
       return this.create({title:title,details:details,
         electionId,
       });
