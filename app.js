@@ -328,6 +328,7 @@ app.delete('/todos/:id', connectEnsureLogin.ensureLoggedIn(), async function(req
 app.get('/elections/:id/ballot',
 connectEnsureLogin.ensureLoggedIn(),
     async (request, response) => {
+      
     try{
           const election = await Elections.findByPk(request.params.id, {
         include: [
@@ -359,9 +360,10 @@ app.post(
       await Questionslist.addquestionnaire(
         
         request.body.title,
-        request.body.description,
+        request.body.details,
         request.params.ele_Id,
-        Console.log("questions name",request.body.title,)
+        
+        
       );
       return response.redirect(`/elections/${request.params.ele_Id}/ballot`);
     }

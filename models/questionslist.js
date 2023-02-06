@@ -13,11 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       Questionslist.belongsTo(models.Elections, {
         foreignKey: "electionId",
       });
-
+// add values database
+//static Add_Election(ele_Name,logged_user) {
+//  return this.create({name:ele_Name,userId:logged_user,start: false,end: false, });
+//}
 
       // define association here
     }
-    static Addquestionnaire(title, details, electionId) {
+    static addquestionnaire(title, details, electionId) {
       return this.create({title:title,details:details,
         electionId,
       });
