@@ -1,5 +1,7 @@
 body{
-    background-color: rgb(32, 159, 117);
+    background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+    
+    
     color:rgb(37, 13, 13);
         font-family: 'Courier New', Courier, monospace;
         
@@ -7,3 +9,6 @@ body{
 .Todo-item:hover .trash-icon{
     display: block;
     }
+.gradient {
+        background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+      }

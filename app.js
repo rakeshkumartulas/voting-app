@@ -24,6 +24,9 @@ const path = require('path');
 
 app.set('views',path.join(__dirname,'views'));
 app.use(flash());
+app.use(express.static(path.join(__dirname, 'public')))
+//app.set('public',path.join(__dirname,'public'));
+app.use(flash());
 
 
 
@@ -142,7 +145,7 @@ app.get('/login',(request,response)=>{
   });
 });
 
-app.post('/user',async (request,response)=>{
+app.post('/users',async (request,response)=>{
   
   if (!request.body.firstName) {
     request.flash("error", " This field can not be blank. Plz Enter Your First name");

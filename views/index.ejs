@@ -7,15 +7,49 @@
     <meta name="csrf-token" content="<%= csrfToken %>" />
     <title>This Is My Todo Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="./css/style.css" rel="stylesheet" />
+    <style>
+      .gradient {
+        background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+      }
+    </style>
+    <link href="./css/styles.css" rel="stylesheet">  
   </head>
-  <body>
-    <div class="grid grid-cols-6">
+  <body class="leading-normal tracking-normal text-white gradient">
+    
+    <div class="grid grid-cols-1">
       <div class="col-start-3 col-span-2">
-        <%- include('header.ejs') %>
-        <p class="py-2">voting web application</p>
-        <p class="py-2">Are you Using First Time? <a href="/signup" class="text-blue-800">Sign-up instant</a></p>
-        <p class="py-2">Do you already have an account? <a href="/login" class="text-blue-800">Sign-in instant</a></p>
+        <h1 class="inline-block py-3 px-0 text-white-800 font-semibold no-underline">Online-Voting-Application</h1>
+<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
+  
+  <ul class="list-reset lg:flex justify-end flex-1 items-center">
+    
+    <li class="mr-3">
+      <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/">Home</a>
+    </li>
+    <li class="mr-3">
+      <a class="inline-block text-black no-underline font-bold hover:text-gray-800 hover:text-underline py-2 px-4" href="/login">SignIn</a>
+    </li>
+    <li class="mr-3">
+      <a class="inline-block text-black no-underline hover:text-gray-800 font-bold hover:text-underline py-2 px-4" href="/signup">SignUp</a>
+    </li>
+  </ul>
+  <button
+    id="navAction" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+  >
+    Contact
+  </button>
+</div>
+        <div class="w-full py-6 text-center">
+          <div class="flex flex-col w-full md:w-3/5 justify-center items-start text-center md:text-left">
+       
+            <h1 class="my-4 text-5xl font-bold leading-tight">
+            Welcome to My Voting Web Application
+            </h1>
+           
+           
+          </div>
+         <img class="w-full md:w-4/5 z-50" src="./img/mainpage.png">
+        </div>
         <%- include('footer.ejs') %>
       </div>
     </div>

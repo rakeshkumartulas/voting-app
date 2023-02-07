@@ -10,28 +10,31 @@
         <div class="election-list">
             <p>Total number of election: <%=elections.length%></p>
         </div>
-        <table class="border-collapse border border-slate-400">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 
                
-                <td class="border-2 border-rose-600 font-bold">S.No.</td>
-                <td class="border-2 border-rose-600 font-bold">Election Name</td>
-                <td class="border-2 border-rose-600 font-bold">Ballot(Question for voter)</td>
-                <td class="border-2 border-rose-600 font-bold">Edit option</td>
-                <td class="border-2 border-rose-600 font-bold">Delete option </td>
+                <th scope="col" class="px-6 py-3">S.No.</th>
+                <th scope="col" class="px-6 py-3">Election Name</th>
+                <th scope="col" class="px-6 py-3">Ballot(Question for voter)</th>
+                <th scope="col" class="px-6 py-3">Edit option</th>
+                <th scope="col" class="px-6 py-3">Delete option </th>
                 
 
             </tr>
-        
+        </thead>
     
             <% for(let i = 0; i < elections.length; i++) { %>
-            <tr>
-                <td class="border border-slate-500"><%= i+1%> </td>
-                <td class="border border-slate-500"><%= elections[i].name %></td>
-                <td class="border border-slate-500 content-center">
-                    <a href="/elections/<%= elections[i].id %>/ballot">click here</a></td>
-                <td class="border border-slate-500"><i class="bi bi-pencil-square"></i></td>
-                <td class="border border-slate-500"><i class="bi bi-x-octagon-fill"></i></td>
+            
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <td class="px-6 py-4"><%= i+1%> </td>
+                        <td class="px-6 py-4"><%= elections[i].name %></td>
+                        <td class="px-6 py-4"><a href="/elections/<%= elections[i].id %>/ballot">click here</a></td>
+                        <td class="px-6 py-4"><a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a></td>
+                        <td class="px-6 py-4"><a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a></td>
                 
                 
                 
@@ -45,5 +48,6 @@
         <%
         }
         %>
+        </div>
   </div>
 </div>

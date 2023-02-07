@@ -19,7 +19,7 @@
     <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
           <%- include("header.ejs") %>
-          <a class='text-red-600' href="/">Home Page Link</a>
+         
           <h6 class="py-4">Login With Your ACCOUNT</h6>
           <form action="/session" method="post">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">

@@ -10,21 +10,24 @@
     <title><%= title%></title>
    
 </head>
-<body>
+<body style="background-color: rgba(190, 200, 200, 0.925);">
 
-    <div class="grid grid-cols-6">
-        <div class="col-start-2 p-6">
-            <a class='text-red-700 rounded-full border-2 p-2 bg-green-700 text-white' href="/Mainpage">Home</a>
+    <ul class="flex">
+        <li class="mr-6">
+            <a class="text-blue-500  mx-5 hover:text-blue-800" href="/Mainpage"> Main Page[ DeshBoard]</a>
        
-        </div>
-        <div class="col-start-5 p-6">
-            <a class='text-red-700 rounded-full border-2 p-2 bg-blue-700 text-white' href="/signout">signout</a>
+        </li>
+        <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="/signout">signout</a>
 
-        </div>
-    </div>
+        </li>
+    </ul>
         <div class="grid grid-cols-4">
             <div class="col-start-2 col-span-2">
-                <h1> Election Questions for Vote Members</h1>
+                <h1 class="my-4 text-3xl font-bold leading-tight flex justify-center">
+                    Election Questions for Vote Members
+                    </h1>
+                
                 <h3>Election Name: <%=election.name %></h1>
                     <div>
                         <% if(messages && messages.error && messages.error.length > 0)  { %>
@@ -40,15 +43,44 @@
                         <div class="py-3">
                             <label for="title">Question Title:</label>
                             <input type="text" name="title" 
-                            class="border border-blue-700 text-blue-900 rounded p-2 w-full">
+                            class="form-control
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
                         </div>
                         <div class="py-3">
                             <label for="description">Question  Details:</label>
                             <input type="text" name="details" 
-                            class="border border-blue-700 text-blue-900 rounded p-2 w-full">
+                            class="form-control
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
                         </div>
                         <div class="py-3">
-                            <button type="submit" class="text-white bg-red-700 hover:bg-red-900 font-medium rounded px-5 py-2">Add New Election</button>
+                            <button type="submit" class="inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Add Question</button>
+                            
                         </div>
                     </form>
                     <%
@@ -62,24 +94,31 @@
                     }
                     else{ 
                        %>
-                       <table class="table-auto border border-collapse border-slate-400 max-w-prose">
+                    </div>
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                       
+                       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <caption> Questions created by You</caption>
                         <tr>
-                            <th class="border border-slate-300">S.No.</th>
-                            <th class="border border-slate-300">Question Title</th> 
-                            <th class="border border-slate-300">Details</th>
-                            <th class="border border-slate-300">Election ID NO.</th>
+                            <th scope="col" class="px-6 py-3">S.No.</th>
+                            <th scope="col" class="px-6 py-3">Question Title</th> 
+                            <th scope="col" class="px-6 py-3">Details</th>
+                            <th scope="col" class="px-6 py-3">Election ID NO.</th>
 
                         </tr>
-                   
+                    </thead>
                        <%
-                        for(let i = 0; i < election.Questionslists.length; i++) {
+                        for(let j = 0; j < election.Questionslists.length; j++) {
                         %>
-                        <tr>
-                            <td class="border border-slate-500"><%=i+1%></td>
-                            <td class="border border-slate-500"><%=election.Questionslists[i].title%></td>
-                            <td class="border border-slate-500"><%=election.Questionslists[i].details%></td>
-                            <td class="border border-slate-500"><%=election.Questionslists[i].id%></td>
+                        <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <td class="px-6 py-4"><%=j+1%></td>
+                            <td class="px-6 py-4"><%=election.Questionslists[j].title%></td>
+                            <td class="px-6 py-4"><%=election.Questionslists[j].details%></td>
+                            <td class="px-6 py-4"><%=election.Questionslists[j].id%></td>
                         </tr>
+                        </tbody>
                     <%
                         }
                     %>
