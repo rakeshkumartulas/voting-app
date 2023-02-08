@@ -37,6 +37,7 @@ app.use(csrf('this_should_be_32_character_long', ['POST', 'PUT', 'DELETE']));
 
 app.use(session({
   secret:"this is my secret-120012001200",
+  resave: false,
   cookie:{
     maxAge: 24 * 60 * 60 * 1000 // that will be equal to 24 Hours / A whole day
   }
@@ -174,7 +175,7 @@ app.post('/users',async (request,response)=>{
         console.log(err);
         response.redirect("/")
       }
-      response.redirect('/Mainpage');
+      response.redirect('/mainpage');
     })
     
   }
