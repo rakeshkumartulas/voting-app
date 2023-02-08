@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 
       // define association here
     }
-    static async findAllElectionOfUser(userId)
+    static findAllElectionOfUser(userId)
     {
       return this.findAll({where:{userId}});
     }
