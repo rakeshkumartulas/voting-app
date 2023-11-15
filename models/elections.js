@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
     static  Add_Election(ele_Name,logged_user) {
       return this.create({name:ele_Name,userId:logged_user,start: false,end: false, });
     }
+    updateElection(ele_Name) {
+      return this.update({ ele_Name });
+    }
+    
   }
    // static async Add_Election({ele_Name, logged_User}){
 

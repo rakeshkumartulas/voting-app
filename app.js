@@ -36,12 +36,19 @@ app.use(cookieParser('ssh!!!! some secret string'));
 app.use(csrf('this_should_be_32_character_long', ['POST', 'PUT', 'DELETE']));
 
 app.use(session({
+  //secret: cookie_secret,
   secret:"this is my secret-120012001200",
   resave: false,
+  //resave:true,
+  //saveUninitialized: true
   cookie:{
     maxAge: 24 * 60 * 60 * 1000 // that will be equal to 24 Hours / A whole day
   }
 }))
+const {
+  User,Elections,questionslist, Options, Voters, Votes
+} = require("./models");
+const e = require('connect-flash');
 
 
 app.use(passport.initialize());
@@ -77,6 +84,39 @@ passport.use(new LocalStrategy({
 
   })
 }))
+
+passport.use(
+  "voter",
+  new LocalStrategy(
+    {
+      usernameField: "voterId",
+      passwordField: "password",
+      passReqToCallback: true,
+    },
+    (request, username, password, done) => {
+      Voters.findOne({
+        where: {
+          voterId: username,
+          electionId: request.params.eid,
+        },
+      })
+        .then(async (voter) => {
+          if (voter !== null) {
+            const result = await bcrypt.compare(password, voter.password);
+            if (result) return done(null, voter);
+            else return done(null, false, { message: "Incorrect Password" });
+          } else {
+            return done(null, false, { message: "Incorrect Voter Id" });
+          }
+        })
+        .catch((err) => {
+          return done(err);
+        });
+    }
+  )
+);
+
+
 
 
 passport.serializeUser((user, done)=>{

@@ -25,6 +25,12 @@ module.exports = (sequelize, DataTypes) => {
         electionId,
       });
     }
+    titleChange(title) {
+      return this.update({ title :title});
+    }
+    detailsUpdater(details) {
+      return this.update({ details });
+    }
   }
   Questionslist.init({
     title: DataTypes.STRING,
